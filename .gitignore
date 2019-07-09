@@ -1,3 +1,13 @@
 /build/
 /node_modules/
 .idea
+
+# js generated from ts
+/src/**/*.js
+/src/**/!_*.js
+
+/src/**/*.js.map
+/src/**/!_*.js.map
+
+/src/App.js
+/src/App.js.map
