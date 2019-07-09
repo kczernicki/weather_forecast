@@ -1,1 +1,3 @@
-# weather_forecast
+# Weather Forecast App
+
+React + typescript 
