@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-import { Application } from './interfaces/AppInterface';
+import SomeModule from './components/SomeModule'
 
-class App extends React.Component<Application, {}> {
+class App extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-        <h1>Welcome to React with Typescript</h1>
-        <p>The webapp name: {this.props.appName}</p>
+        <SomeModule appName={'React test name!!'}/>
       </div>
   );
   }
