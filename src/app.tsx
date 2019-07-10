@@ -1,14 +1,10 @@
 import * as React from 'react';
 
-import SomeModule from './components/SomeModule'
+import HomePage from './ui/pages/Home'
 
 class App extends React.Component<{}, {}> {
   render() {
-    return (
-      <div>
-        <SomeModule appName={'React test name!!'}/>
-      </div>
-  );
+    return <HomePage />
   }
 }
 
