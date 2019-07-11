@@ -1,0 +1,90 @@
+.table__wrapper {
+  text-align: center;
+  max-height: calc(100vh - 150px);
+  overflow: scroll;
+}
+
+table {
+  margin: 40px auto;
+  width: 700px;
+  max-width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+  -moz-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+  -o-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+  -ms-box-shadow: 0 0 40px 0 rgba(0,0,0,.15);
+  border-collapse: collapse;
+}
+
+thead {
+  th {
+    background-color: #6c7ae0;
+    padding: 15px;
+    font-family: Roboto-Bold;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+}
+
+tr {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+td {
+  font-family: Roboto-Medium;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #999;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 760px){
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin: 0 0 1rem 0;
+  }
+
+  tr:nth-child(odd) {
+    background: #6c7ae0;
+
+    td {
+      color: #fff;
+    }
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding: 10px 10px 10px 50%;
+    text-align: left;
+  }
+
+  td:before {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 40%;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  td:nth-of-type(1):before { content: "Date"; }
+  td:nth-of-type(2):before { content: "Temperature"; }
+  td:nth-of-type(3):before { content: "Pressure"; }
+  td:nth-of-type(4):before { content: "Description"; }
+}

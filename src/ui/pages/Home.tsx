@@ -5,9 +5,16 @@ import {
 import {WeatherRepository} from '../../repository';
 
 import { PlaceChooser } from '../components/placeChooser'
+import { WeatherTable } from '../components/weatherTable'
+import { Weather } from '../../interfaces';
+import './Home.scss'
 
-class Home extends React.PureComponent<{}, {address: string, weatherData: {list: any}}> {
-  state = {
+interface State {
+  address: string,
+  weatherData: Weather
+}
+class Home extends React.PureComponent<{}, State> {
+  state: State = {
     address: '',
     weatherData: null
   };
@@ -24,6 +31,8 @@ class Home extends React.PureComponent<{}, {address: string, weatherData: {list:
   };
 
   render() {
+    const { weatherData } = this.state;
+
     return (
       <div className="page page--home">
         <h1>Weather app</h1>
@@ -31,8 +40,8 @@ class Home extends React.PureComponent<{}, {address: string, weatherData: {list:
         <PlaceChooser handleSelect={this.handleSelect}/>
 
         {
-          this.state.weatherData
-            ? this.state.weatherData.list.map(elem => <p> {elem.main.temp}</p>)
+          weatherData
+            ? <WeatherTable weather={weatherData}/>
             : null
         }
       </div>
