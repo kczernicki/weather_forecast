@@ -1,71 +1,40 @@
 import * as React from 'react';
-import PlacesAutocomplete, {
+import {
   geocodeByAddress,
-  getLatLng,
 } from 'react-places-autocomplete';
-class Home extends React.PureComponent<{}, {address: string}> {
-  state = { address: '' };
+import {WeatherRepository} from '../../repository';
 
-  handleChange = address => {
-    console.log('change', address);
-    this.setState({ address });
+import { PlaceChooser } from '../components/placeChooser'
+
+class Home extends React.PureComponent<{}, {address: string, weatherData: {list: any}}> {
+  state = {
+    address: '',
+    weatherData: null
   };
 
   handleSelect = address => {
-    console.log('handleSelect address', address);
     geocodeByAddress(address)
-      .then(results => {
-        console.log('geocodeByAddress', results);
-        return getLatLng(results[0])
+      .then(async results => {
+        const location = results[0].geometry.location;
+        let data = await WeatherRepository.getWeatherByLatLng(location.lat(), location.lng());
+
+        this.setState({weatherData: data})
       })
-      .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error));
   };
 
   render() {
     return (
-      <div>
-        <h1>home page</h1>
+      <div className="page page--home">
+        <h1>Weather app</h1>
 
+        <PlaceChooser handleSelect={this.handleSelect}/>
 
-        <PlacesAutocomplete
-          value={this.state.address}
-          onChange={this.handleChange}
-          onSelect={this.handleSelect}
-        >
-          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <div>
-              <input
-                {...getInputProps({
-                  placeholder: 'Search Places ...',
-                  className: 'location-search-input',
-                })}
-              />
-              <div className="autocomplete-dropdown-container">
-                {loading && <div>Loading...</div>}
-                {suggestions.map(suggestion => {
-                  const className = suggestion.active
-                    ? 'suggestion-item--active'
-                    : 'suggestion-item';
-                  // inline style for demonstration purpose
-                  const style = suggestion.active
-                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                  return (
-                    <div
-                      {...getSuggestionItemProps(suggestion, {
-                        className,
-                        style,
-                      })}
-                    >
-                      <span>{suggestion.description}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </PlacesAutocomplete>
+        {
+          this.state.weatherData
+            ? this.state.weatherData.list.map(elem => <p> {elem.main.temp}</p>)
+            : null
+        }
       </div>
     );
   }
