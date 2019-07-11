@@ -7,12 +7,17 @@ class Home extends React.PureComponent<{}, {address: string}> {
   state = { address: '' };
 
   handleChange = address => {
+    console.log('change', address);
     this.setState({ address });
   };
 
   handleSelect = address => {
+    console.log('handleSelect address', address);
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
+      .then(results => {
+        console.log('geocodeByAddress', results);
+        return getLatLng(results[0])
+      })
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error));
   };
