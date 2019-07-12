@@ -1,66 +1,79 @@
-import * as React from 'react';
-import { geocodeByAddress } from 'react-places-autocomplete';
-import { WeatherRepository } from '../../repository';
+import * as React from 'react'
+import { geocodeByAddress } from 'react-places-autocomplete'
+import { WeatherRepository } from '../../repository'
 import { PlaceChooser } from '../components/placeChooser'
 import { WeatherTable } from '../components/weatherTable'
-import { Weather } from '../../interfaces';
+import { Weather } from '../../interfaces'
 import './HomePage.scss'
+import { Loader } from '../components/loader'
 
 interface State {
   address: string,
   weatherData: Weather,
+  loading: boolean
 }
 
 class HomePage extends React.PureComponent<{}, State> {
   state: State = {
     address: '',
-    weatherData: null
-  };
-
-  componentDidMount(): void {
-    this.getUserLocation();
+    weatherData: null,
+    loading: false
   }
 
-  getUserLocation() {
-    if ("geolocation" in navigator) {
+  componentDidMount (): void {
+    this.getUserLocation()
+  }
+
+  getUserLocation () {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const data = await WeatherRepository.getWeatherByLatLng(position.coords.latitude, position.coords.longitude);
+          const data = await WeatherRepository.getWeatherByLatLng(position.coords.latitude, position.coords.longitude)
           // todo set location in input
-          this.setState({weatherData: data});
+          this.setState({ weatherData: data })
 
         },
-        (error_message) => {
-          console.error('An error has occured while retrieving location', error_message)
+        (error) => {
+          console.error('An error has occured while retrieving location', error)
         }
-      );
+      )
     }
   }
 
   handleSelect = address => {
+    this.setState({ loading: true })
     geocodeByAddress(address)
       .then(async results => {
-        const location = results[0].geometry.location;
-        const data = await WeatherRepository.getWeatherByLatLng(location.lat(), location.lng());
+        const location = results[0].geometry.location
+        const data = await WeatherRepository.getWeatherByLatLng(location.lat(), location.lng())
 
-        this.setState({weatherData: data})
+        this.setState({
+          weatherData: data,
+          loading: false
+        })
       })
-      .catch(error => console.error('Error', error));
-  };
+      .catch(error => console.error('Error', error))
+  }
 
-  render() {
-    const { weatherData } = this.state;
+  render () {
+    const {
+      weatherData,
+      loading
+    } = this.state
 
     return (
-      <div className="page page--home">
+      <div className='page page--home'>
         <h1>Weather app</h1>
 
         <PlaceChooser handleSelect={this.handleSelect} />
-
-        { weatherData && <WeatherTable weather={weatherData} /> }
+        {
+          loading
+          ? <Loader />
+          : weatherData && <WeatherTable weather={weatherData} />
+        }
       </div>
-    );
+    )
   }
 }
 
-export default HomePage;
+export default HomePage

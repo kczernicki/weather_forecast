@@ -1,0 +1,9 @@
+{
+  "extends": ["tslint-config-standard", "tslint-react" ],
+  "rules": {
+    // override tslint-react rules here
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false,
+    "jsx-no-multiline-js": false
+  }
+}

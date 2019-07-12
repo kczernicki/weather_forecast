@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from 'react'
 
 import HomePage from './ui/pages/HomePage'
 
 class App extends React.Component<{}, {}> {
-  render() {
+  render () {
     return <HomePage />
   }
 }
 
-export default App;
+export default App
