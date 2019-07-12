@@ -11,7 +11,8 @@ import './Home.scss'
 
 interface State {
   address: string,
-  weatherData: Weather
+  weatherData: Weather,
+
 }
 class Home extends React.PureComponent<{}, State> {
   state: State = {
@@ -19,11 +20,31 @@ class Home extends React.PureComponent<{}, State> {
     weatherData: null
   };
 
+  componentDidMount(): void {
+    this.getUserLocation();
+  }
+
+  getUserLocation() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const data = await WeatherRepository.getWeatherByLatLng(position.coords.latitude, position.coords.longitude);
+          // todo set location in input
+          this.setState({weatherData: data});
+
+        },
+        (error_message) => {
+          console.error('An error has occured while retrievinglocation', error_message)
+        }
+      );
+    }
+  }
+
   handleSelect = address => {
     geocodeByAddress(address)
       .then(async results => {
         const location = results[0].geometry.location;
-        let data = await WeatherRepository.getWeatherByLatLng(location.lat(), location.lng());
+        const data = await WeatherRepository.getWeatherByLatLng(location.lat(), location.lng());
 
         this.setState({weatherData: data})
       })
@@ -37,11 +58,11 @@ class Home extends React.PureComponent<{}, State> {
       <div className="page page--home">
         <h1>Weather app</h1>
 
-        <PlaceChooser handleSelect={this.handleSelect}/>
+        <PlaceChooser handleSelect={this.handleSelect} />
 
         {
           weatherData
-            ? <WeatherTable weather={weatherData}/>
+            ? <WeatherTable weather={weatherData} />
             : null
         }
       </div>

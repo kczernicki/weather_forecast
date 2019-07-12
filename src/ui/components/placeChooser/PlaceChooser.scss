@@ -10,28 +10,40 @@ input {
   box-sizing: border-box;
 }
 
-.autocomplete-container {
-  border-bottom: honeydew;
-  border-left: honeydew;
-  border-right: honeydew;
-  border-top: 1px solid #e6e6e6;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  border-radius: 0 0 2px 2px;
+.autocomplete {
+
+  &__wrapper {
+    width: 700px;
+    max-width: 90%;
+    text-align: center;
+    margin: auto;
+    position: relative;
+  }
+
+  &__container {
+    border-bottom: honeydew;
+    border-left: honeydew;
+    border-right: honeydew;
+    border-top: 1px solid #e6e6e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0 0 2px 2px;
+    position: absolute;
+    width: 100%;
+  }
 }
 
-.suggestion-item {
-  padding: 8px;
-  text-align: left;
-  background-color: #fff;
-  cursor: pointer;
-}
+.suggestion {
 
-.suggestion-item--active {
-  background-color: #fafafa;
-}
+  &__item {
+    padding: 8px;
+    text-align: left;
+    background-color: #fff;
+    cursor: pointer;
 
-.dropdown-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 4px;
+    &--active {
+      background-color: #fafafa;
+      text-align: left;
+
+    }
+  }
 }

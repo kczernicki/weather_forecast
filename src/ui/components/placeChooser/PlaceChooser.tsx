@@ -24,6 +24,7 @@ export class PlaceChooser extends React.PureComponent<Props, {address: string}> 
 
   render() {
     return (
+      <div className="autocomplete__wrapper">
         <PlacesAutocomplete
           value={this.state.address}
           onChange={this.handleChange}
@@ -37,12 +38,12 @@ export class PlaceChooser extends React.PureComponent<Props, {address: string}> 
                   className: 'location-search-input',
                 })}
               />
-              <div className="autocomplete-container">
+              <div className="autocomplete__container">
                 {loading && <div>Loading...</div>}
                 {suggestions.map(suggestion => {
                   const className = suggestion.active
-                    ? 'suggestion-item--active'
-                    : 'suggestion-item';
+                    ? 'suggestion__item suggestion__item--active'
+                    : 'suggestion__item';
                   return (
                     <div
                       {...getSuggestionItemProps(suggestion, {
@@ -57,6 +58,7 @@ export class PlaceChooser extends React.PureComponent<Props, {address: string}> 
             </div>
           )}
         </PlacesAutocomplete>
+      </div>
     );
   }
 }
