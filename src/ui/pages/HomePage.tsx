@@ -1,20 +1,17 @@
 import * as React from 'react';
-import {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
-import {WeatherRepository} from '../../repository';
-
+import { geocodeByAddress } from 'react-places-autocomplete';
+import { WeatherRepository } from '../../repository';
 import { PlaceChooser } from '../components/placeChooser'
 import { WeatherTable } from '../components/weatherTable'
 import { Weather } from '../../interfaces';
-import './Home.scss'
+import './HomePage.scss'
 
 interface State {
   address: string,
   weatherData: Weather,
-
 }
-class Home extends React.PureComponent<{}, State> {
+
+class HomePage extends React.PureComponent<{}, State> {
   state: State = {
     address: '',
     weatherData: null
@@ -34,7 +31,7 @@ class Home extends React.PureComponent<{}, State> {
 
         },
         (error_message) => {
-          console.error('An error has occured while retrievinglocation', error_message)
+          console.error('An error has occured while retrieving location', error_message)
         }
       );
     }
@@ -60,14 +57,10 @@ class Home extends React.PureComponent<{}, State> {
 
         <PlaceChooser handleSelect={this.handleSelect} />
 
-        {
-          weatherData
-            ? <WeatherTable weather={weatherData} />
-            : null
-        }
+        { weatherData && <WeatherTable weather={weatherData} /> }
       </div>
     );
   }
 }
 
-export default Home;
+export default HomePage;

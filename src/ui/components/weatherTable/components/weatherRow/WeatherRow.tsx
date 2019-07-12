@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './WeatherRow.scss'
-import { WeatherList } from '../../../interfaces';
+import { WeatherList } from '../../../../../interfaces';
 
 interface Props {
   weather: WeatherList,
@@ -18,11 +18,11 @@ export class WeatherRow extends React.PureComponent<Props> {
 
     } } = this.props;
     return (
-      <tr role="row">
-        <td role="cell">{dt_txt}</td>
-        <td role="cell">{temp}</td>
-        <td role="cell">{pressure}</td>
-        <td role="cell">{weather[0] ? weather[0].description : ''}</td>
+      <tr>
+        <td>{dt_txt}</td>
+        <td>{temp}</td>
+        <td>{pressure}</td>
+        <td>{weather[0] ? weather[0].description : ''}</td>
       </tr>
     );
   }

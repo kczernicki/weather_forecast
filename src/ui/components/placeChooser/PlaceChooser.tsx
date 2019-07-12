@@ -12,12 +12,12 @@ export class PlaceChooser extends React.PureComponent<Props, {address: string}> 
   };
 
   handleChange = address => {
-    console.log('change', address);
     this.setState({ address });
   };
 
   handleSelect = (selected) => {
     const { handleSelect } = this.props;
+
     this.setState({  address: selected });
     handleSelect(selected);
   }
@@ -35,15 +35,14 @@ export class PlaceChooser extends React.PureComponent<Props, {address: string}> 
               <input
                 {...getInputProps({
                   placeholder: 'Search Places ...',
-                  className: 'location-search-input',
+                  className: 'autocomplete__input',
                 })}
               />
               <div className="autocomplete__container">
                 {loading && <div>Loading...</div>}
                 {suggestions.map(suggestion => {
-                  const className = suggestion.active
-                    ? 'suggestion__item suggestion__item--active'
-                    : 'suggestion__item';
+                  const className = `suggestion__item ${suggestion.active ? 'suggestion__item--active' : '' }`;
+
                   return (
                     <div
                       {...getSuggestionItemProps(suggestion, {

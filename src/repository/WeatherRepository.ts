@@ -9,7 +9,7 @@ export class WeatherRepository {
       const reqeust = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&APPID=${WEATHER_API_APP_ID}`);
       return await reqeust.json()
     } catch (error) {
-      throw error.response.data
+      throw error
     }
   }
 }
