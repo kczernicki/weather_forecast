@@ -4,11 +4,18 @@ import './PlaceChooser.scss'
 
 interface Props {
   handleSelect: (address: string) => void
+  addressFromUserLocation?: string
 }
 
 export class PlaceChooser extends React.PureComponent<Props, {address: string}> {
   state = {
     address: ''
+  }
+
+  componentWillReceiveProps (nextProps: Readonly<Props>, nextContext: any): void {
+    if (nextProps.addressFromUserLocation !== this.props.addressFromUserLocation) {
+      this.setState({ address: nextProps.addressFromUserLocation })
+    }
   }
 
   handleChange = address => {

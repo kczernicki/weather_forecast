@@ -9,6 +9,7 @@ import { Loader } from '../components/loader'
 
 interface State {
   address: string,
+  addressFromUserLocation: string,
   weatherData: Weather,
   loading: boolean
 }
@@ -17,7 +18,8 @@ class HomePage extends React.PureComponent<{}, State> {
   state: State = {
     address: '',
     weatherData: null,
-    loading: false
+    loading: false,
+    addressFromUserLocation: null
   }
 
   componentDidMount (): void {
@@ -28,9 +30,14 @@ class HomePage extends React.PureComponent<{}, State> {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
+          this.setState({ loading: true })
           const data = await WeatherRepository.getWeatherByLatLng(position.coords.latitude, position.coords.longitude)
-          // todo set location in input
-          this.setState({ weatherData: data })
+
+          this.setState({
+            weatherData: data,
+            addressFromUserLocation: `${data.city.name}, ${data.city.country}`,
+            loading: false
+          })
 
         },
         (error) => {
@@ -52,20 +59,24 @@ class HomePage extends React.PureComponent<{}, State> {
           loading: false
         })
       })
-      .catch(error => console.error('Error', error))
+      .catch(error => {
+        console.error('Error', error)
+        this.setState({ loading: false })
+      })
   }
 
   render () {
     const {
       weatherData,
-      loading
+      loading,
+      addressFromUserLocation
     } = this.state
 
     return (
       <div className='page page--home'>
         <h1>Weather app</h1>
 
-        <PlaceChooser handleSelect={this.handleSelect} />
+        <PlaceChooser handleSelect={this.handleSelect} addressFromUserLocation={addressFromUserLocation}/>
         {
           loading
           ? <Loader />
