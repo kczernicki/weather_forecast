@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { shallow, configure } from 'enzyme'
+import { shallow, configure, mount } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
-import { WeatherTable } from './WeatherTable'
+import { WeatherBody } from './WeatherBody'
 
 configure({ adapter: new Adapter() })
 const Props = {weather: {
@@ -59,22 +59,16 @@ const Props = {weather: {
 }}
 
 it('shallow renders without crashing', () => {
-  shallow(<WeatherTable {...Props}/>)
+  shallow(<WeatherBody {...Props}/>)
 })
 
-it('includes table header', () => {
-  const app = shallow(<WeatherTable {...Props}/>)
-  expect(app.containsMatchingElement(
-    <tr>
-      <th>Date</th>
-      <th>Temperature</th>
-      <th>Pressure</th>
-      <th>Description</th>
-    </tr>
-  )).toEqual(true)
-})
+describe('List items tests', () => {
 
-it('passes weather list to the weatherBody', () => {
-  const app = shallow(<WeatherTable {...Props} />)
-  expect(app.find('WeatherBody').prop('weather')).toEqual(Props.weather)
+  it('renders list-items', () => {
+    const wrapper = mount(<WeatherBody {...Props}/>)
+
+    expect(wrapper.find('tbody')).toBeDefined()
+    expect(wrapper.find('tr')).toHaveLength(Props.weather.list.length)
+  })
+
 })

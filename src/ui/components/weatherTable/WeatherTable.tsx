@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './WeatherTable.scss'
 import { Weather } from '../../../interfaces'
-import { WeatherRow } from './components/weatherRow'
+import { WeatherBody } from './components/weatherBody'
 
 interface Props {
   weather: Weather,
@@ -14,16 +14,14 @@ export class WeatherTable extends React.PureComponent<Props> {
       <div className='table__wrapper'>
         <table className='table'>
           <thead>
-          <tr>
-            <th>Date</th>
-            <th>Temperature</th>
-            <th>Pressure</th>
-            <th>Description</th>
-          </tr>
+            <tr>
+              <th>Date</th>
+              <th>Temperature</th>
+              <th>Pressure</th>
+              <th>Description</th>
+            </tr>
           </thead>
-          <tbody>
-          {weather.list.map((weatherRow) => <WeatherRow weather={weatherRow} key={weatherRow.dt}/>)}
-          </tbody>
+          <WeatherBody weather={weather} />
         </table>
       </div>
     )
