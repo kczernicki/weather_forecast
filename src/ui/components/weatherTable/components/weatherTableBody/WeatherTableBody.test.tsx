@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { shallow, configure, mount } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
-import { WeatherBody } from './WeatherBody'
+import { WeatherTableBody } from './WeatherTableBody'
 
 configure({ adapter: new Adapter() })
 const Props = {weather: {
@@ -59,13 +59,13 @@ const Props = {weather: {
 }}
 
 it('shallow renders without crashing', () => {
-  shallow(<WeatherBody {...Props}/>)
+  shallow(<WeatherTableBody {...Props}/>)
 })
 
 describe('List items tests', () => {
 
   it('renders list-items', () => {
-    const wrapper = mount(<WeatherBody {...Props}/>)
+    const wrapper = mount(<WeatherTableBody {...Props}/>)
 
     expect(wrapper.find('tbody')).toBeDefined()
     expect(wrapper.find('tr')).toHaveLength(Props.weather.list.length)

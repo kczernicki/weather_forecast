@@ -1,0 +1,1 @@
+export { WeatherTableBody } from './WeatherTableBody'

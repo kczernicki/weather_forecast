@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './WeatherTable.scss'
 import { Weather } from '@interfaces/index'
-import { WeatherBody } from './components/weatherBody'
+import { WeatherTableBody } from './components/weatherTableBody'
 
 interface Props {
   weather: Weather,
@@ -21,7 +21,7 @@ export class WeatherTable extends React.PureComponent<Props> {
               <th>Description</th>
             </tr>
           </thead>
-          <WeatherBody weather={weather} />
+          <WeatherTableBody weather={weather} />
         </table>
       </div>
     )

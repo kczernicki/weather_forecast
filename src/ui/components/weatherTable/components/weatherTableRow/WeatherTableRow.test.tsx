@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { shallow, configure } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
-import { WeatherRow } from './WeatherRow'
+import { WeatherTableRow } from './WeatherTableRow'
 import { formatDate, formatTemperature } from './utils'
 
 configure({ adapter: new Adapter() })
@@ -42,11 +42,11 @@ const Props = {weather: {
 }}
 
 it('shallow renders without crashing', () => {
-  shallow(<WeatherRow {...Props}/>)
+  shallow(<WeatherTableRow {...Props}/>)
 })
 
 it('test render props', () => {
-  const app = shallow(<WeatherRow {...Props}/>)
+  const app = shallow(<WeatherTableRow {...Props}/>)
   expect(app.containsMatchingElement(
     <tr>
       <td>{formatDate(Props.weather.dt_txt)}</td>

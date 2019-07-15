@@ -1,1 +1,0 @@
-export { WeatherBody } from './WeatherBody'

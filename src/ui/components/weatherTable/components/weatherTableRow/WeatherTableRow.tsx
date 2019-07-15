@@ -1,12 +1,12 @@
 import * as React from 'react'
-import './WeatherRow.scss'
+import './WeatherTableRow.scss'
 import { WeatherList } from '@interfaces/index'
 import { formatDate, formatTemperature } from './utils'
 interface Props {
   weather: WeatherList,
 }
 
-export class WeatherRow extends React.PureComponent<Props> {
+export class WeatherTableRow extends React.PureComponent<Props> {
   render () {
     const { weather: {
       dt_txt,
