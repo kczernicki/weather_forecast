@@ -65,7 +65,9 @@
       "js"
     ],
     "moduleNameMapper": {
-      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "@components(.*)$": "<rootDir>/src/ui/components$1",
+      "@repository(.*)$": "<rootDir>/src/repository$1"
     }
   }
 }

@@ -76,5 +76,5 @@ it('includes table header', () => {
 
 it('passes weather list to the weatherBody', () => {
   const app = shallow(<WeatherTable {...Props} />)
-  expect(app.find('WeatherBody').prop('weather')).toEqual(Props.weather)
+  expect(app.find('WeatherTableBody').prop('weather')).toEqual(Props.weather)
 })
