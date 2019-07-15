@@ -36,10 +36,7 @@ $ npm run-script build
 ### Future
 
 1. More complicated tests
-2. Use user location in better way
-3. Add map
-4. Loader
-5. Parse data
-6. Error handling
-7. Add aliases
+2. Add map
+3. Error handling
+4. Add aliases
 

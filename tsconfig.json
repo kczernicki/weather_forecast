@@ -14,9 +14,10 @@
     "jsx": "react",
     "baseUrl": "./",
     "paths": {
-      "components/*": [
-        "src/components/*"
-      ]
+      "@components/*": ["src/ui/components/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@repository/*": ["src/repository/*"],
+      "@pages/*": ["src/ui/pages/*"]
     }
   }
 }

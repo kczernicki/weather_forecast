@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './WeatherBody.scss'
-import { Weather } from '../../../../../interfaces'
+import { Weather } from '@interfaces/index'
 import { WeatherRow } from '../weatherRow'
 
 interface Props {

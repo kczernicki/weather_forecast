@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { geocodeByAddress } from 'react-places-autocomplete'
-import { WeatherRepository } from '../../repository'
-import { PlaceChooser } from '../components/placeChooser'
-import { WeatherTable } from '../components/weatherTable'
-import { Weather } from '../../interfaces'
+import { WeatherRepository } from '@repository/index'
+import { PlaceChooser } from '@components/placeChooser'
+import { WeatherTable } from '@components/weatherTable'
+import { Weather } from '@interfaces/index'
 import './HomePage.scss'
-import { Loader } from '../components/loader'
+import { Loader } from '@components/loader'
 
 interface State {
   address: string,

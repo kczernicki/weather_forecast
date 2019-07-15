@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './WeatherRow.scss'
-import { WeatherList } from '../../../../../interfaces'
+import { WeatherList } from '@interfaces/index'
 import { formatDate, formatTemperature } from './utils'
 interface Props {
   weather: WeatherList,

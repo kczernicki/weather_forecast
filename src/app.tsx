@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import HomePage from './ui/pages/HomePage'
+import { HomePage } from '@pages/homePage'
 
 class App extends React.Component<{}, {}> {
   render () {
