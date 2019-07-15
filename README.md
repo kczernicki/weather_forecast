@@ -34,9 +34,7 @@ $ npm run-script build
 
 
 ### Future
-
-1. More complicated tests
+1. Better tests
 2. Add map
 3. Error handling
-4. Add aliases
 
